@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controleur.Controle;
+import controleur.Global;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EntreeJeu extends JFrame {
+public class EntreeJeu extends JFrame implements Global {
 
 	private JPanel frmUrbanMarginal;
 	private JTextField txtIPServer;

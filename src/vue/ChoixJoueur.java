@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import controleur.Controle;
+import controleur.Global;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -23,7 +24,7 @@ import java.awt.Dimension;
  * @author emds
  *
  */
-public class ChoixJoueur extends JFrame {
+public class ChoixJoueur extends JFrame implements Global {
 
 	/**
 	 * Panel général
@@ -47,16 +48,11 @@ public class ChoixJoueur extends JFrame {
 	private int numPerso;
 
 	/**
-	 * nombres maxi de personnages a afficher
-	 */
-	private static final int NBMAXPERSO = 3;
-
-	/**
 	 * Clic sur la flèche "précédent" pour afficher le personnage précédent
 	 */
 	private void lblPrecedent_clic() {
 		// System.out.println("Clic sur precedent");
-		numPerso = ((numPerso + 1) % NBMAXPERSO) + 1;
+		numPerso = ((numPerso + 1) % NBPERSOS) + 1;
 		affichePerso();
 	}
 
@@ -65,7 +61,7 @@ public class ChoixJoueur extends JFrame {
 	 */
 	private void lblSuivant_clic() {
 		// System.out.println("Clic sur suivant");
-		numPerso = (numPerso % NBMAXPERSO) + 1;
+		numPerso = (numPerso % NBPERSOS) + 1;
 		affichePerso();
 	}
 
@@ -85,7 +81,7 @@ public class ChoixJoueur extends JFrame {
 	 * affiche le personnage en fonction de son numero
 	 */
 	private void affichePerso() {
-		String chemin = "personnages/perso" + this.numPerso + "marche" + 1 + "d" + 1 + ".gif";
+		String chemin = CHEMINPERSONNAGES + PERSO + this.numPerso + MARCHE + 1 + "d" + 1 + EXTFICHIERPERSO;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		this.lblPersonnage.setIcon(new ImageIcon(resource));
 	}
@@ -187,7 +183,7 @@ public class ChoixJoueur extends JFrame {
 
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, 400, 275);
-		String chemin = "fonds/fondchoix.jpg";
+		String chemin = FONDCHOIX;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		lblFond.setIcon(new ImageIcon(resource));
 		contentPane.add(lblFond);

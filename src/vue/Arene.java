@@ -3,6 +3,8 @@ package vue;
 import java.awt.Dimension;
 import java.net.URL;
 
+import controleur.Global;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +18,7 @@ import javax.swing.JTextField;
  * @author emds
  *
  */
-public class Arene extends JFrame {
+public class Arene extends JFrame implements Global {
 
 	/**
 	 * Panel général
@@ -61,7 +63,7 @@ public class Arene extends JFrame {
 		jspChat.setViewportView(txtChat);
 		
 		JLabel lblFond = new JLabel("");
-		String chemin = "fonds/fondarene.jpg";
+		String chemin = FONDARENE;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		lblFond.setIcon(new ImageIcon(resource));		
 		lblFond.setBounds(0, 0, 800, 600);
