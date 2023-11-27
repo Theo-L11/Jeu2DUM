@@ -127,6 +127,26 @@ public interface Global {
 	 */
 	int HAUTEURMUR = 35;
 	/**
+	 * largeur d'un perso
+	 */
+	int LARGEURPERSO = 39;
+	/**
+	 * hauteur d'un perso
+	 */
+	int HAUTEURPERSO = 44;
+	/**
+	 * hauteur du message
+	 */
+	int HAUTEURMESSAGE = 8;
+	/**
+	 * orientation du personnage vers la gauche
+	 */
+	int GAUCHE = 0;
+	/**
+	 * orientation du personnage vers la droite
+	 */
+	int DROITE = 1;
+	/**
 	 * nombre de murs
 	 */
 	int NBMURS = 20;
@@ -142,5 +162,13 @@ public interface Global {
 	 * ordre ajout panel murs
 	 */
 	String AJOUTPANELMURS = "ajout panel murs";
+	/**
+	 * ordre ajout label jeu
+	 */
+	String AJOUTLABELJEU = "ajout jlabel jeu";
+	/**
+	 * ordre modif panel jeu
+	 */
+	String MODIFPANELJEU = "modif panel jeu";
 
 }
