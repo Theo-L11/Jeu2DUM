@@ -35,7 +35,7 @@ public class EntreeJeu extends JFrame implements Global {
 	 * click sur le bouton start pour lancer le serveur
 	 */
 	private void btnStart_Click() {
-		this.controle.evenementEntreeJeu("serveur");
+		this.controle.evenementEntreeJeu(SERVEUR);
 	}
 
 	/**

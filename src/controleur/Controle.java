@@ -1,5 +1,7 @@
 package controleur;
 
+import javax.swing.JPanel;
+
 import modele.Jeu;
 import modele.JeuClient;
 import modele.JeuServeur;
@@ -34,7 +36,6 @@ public class Controle implements AsyncResponse, Global {
 	 */
 	private ChoixJoueur frmChoixJoueur;
 
-
 	/**
 	 * type du jeu : soit serveur, soit client
 	 */
@@ -63,21 +64,57 @@ public class Controle implements AsyncResponse, Global {
 	 * @param info information à traiter
 	 */
 	public void evenementEntreeJeu(String info) {
-		if (info.equals("serveur")) {
+		if (info.equals(SERVEUR)) {
 			new ServeurSocket(this, PORT);
 			this.leJeu = new JeuServeur(this);
 			this.frmEntreeJeu.dispose();
 			this.frmArene = new Arene();
+			((JeuServeur) this.leJeu).constructionMurs();
 			this.frmArene.setVisible(true);
 		} else {
 			new ClientSocket(this, info, PORT);
 		}
 	}
-	
+
+	/**
+	 * demande provenant de la vue ChoixJoueur
+	 * 
+	 * @param pseudo   choisi par le joueur
+	 * @param numPerso permet de savoir quel perso a été choisi
+	 */
 	public void evenementChoixJoueur(String pseudo, int numPerso) {
 		this.frmChoixJoueur.dispose();
 		this.frmArene.setVisible(true);
-		((JeuClient)this.leJeu).envoi(PSEUDO + STRINGSEPARE + pseudo + STRINGSEPARE + numPerso );
+		((JeuClient) this.leJeu).envoi(PSEUDO + STRINGSEPARE + pseudo + STRINGSEPARE + numPerso);
+	}
+
+	/**
+	 * Demande provenant du modele JeuServeur sur la construction de mur
+	 * 
+	 * @param ordre demande formulé
+	 * @param info  info envoyé pour repondre a cette demande
+	 */
+	public void evenementJeuServeur(String ordre, Object info) {
+		switch (ordre) {
+		case AJOUTMUR:
+			frmArene.ajoutMurs(info);
+			break;
+		case AJOUTPANELMURS:
+			this.leJeu.envoi((Connection) info, this.frmArene.getJpnMurs());
+		}
+	}
+
+	/**
+	 * Demande provenant de JeuClient
+	 * @param ordre ordre à exécuter
+	 * @param info information à traiter
+	 */
+	public void evenementJeuClient(String ordre, Object info) {
+		switch(ordre) {
+		case AJOUTPANELMURS :
+			this.frmArene.setJpnMurs((JPanel)info);
+			break;
+		}
 	}
 
 	@Override
@@ -91,7 +128,7 @@ public class Controle implements AsyncResponse, Global {
 				this.frmChoixJoueur = new ChoixJoueur(this);
 				this.frmArene = new Arene();
 				this.frmChoixJoueur.setVisible(true);
-			}else {
+			} else {
 				this.leJeu.connexion(connection);
 			}
 			break;
@@ -102,9 +139,9 @@ public class Controle implements AsyncResponse, Global {
 			break;
 		}
 	}
-	
+
 	public void envoi(Connection connection, Object info) {
 		connection.envoi(info);
 	}
-	
+
 }
