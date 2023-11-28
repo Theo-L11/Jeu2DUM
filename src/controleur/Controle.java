@@ -104,42 +104,48 @@ public class Controle implements AsyncResponse, Global {
 			this.leJeu.envoi((Connection) info, this.frmArene.getJpnMurs());
 			break;
 		case AJOUTLABELJEU:
-			this.frmArene.ajoutLabelJeu((JLabel)info);
+			this.frmArene.ajoutLabelJeu((JLabel) info);
 			break;
 		case MODIFPANELJEU:
 			this.leJeu.envoi((Connection) info, this.frmArene.getJpnJeu());
 			break;
 		case AJOUTPHRASE:
-			this.frmArene.ajoutTChat((String)info);
-			((JeuServeur)this.leJeu).envoi(this.frmArene.getTxtChat());
+			this.frmArene.ajoutTChat((String) info);
+			((JeuServeur) this.leJeu).envoi(this.frmArene.getTxtChat());
 		}
 	}
 
 	/**
 	 * Demande provenant de JeuClient
+	 * 
 	 * @param ordre ordre à exécuter
-	 * @param info information à traiter
+	 * @param info  information à traiter
 	 */
 	public void evenementJeuClient(String ordre, Object info) {
-		switch(ordre) {
-		case AJOUTPANELMURS :
-			this.frmArene.setJpnMurs((JPanel)info);
+		switch (ordre) {
+		case AJOUTPANELMURS:
+			this.frmArene.setJpnMurs((JPanel) info);
 			break;
 		case MODIFPANELJEU:
-			this.frmArene.setJpnJeu((JPanel)info);
+			this.frmArene.setJpnJeu((JPanel) info);
 			break;
 		case MODIFTCHAT:
-			this.frmArene.setTxtChat((String)info);
+			this.frmArene.setTxtChat((String) info);
 			break;
 		}
 	}
-	
+
 	/**
 	 * Information provenant de la vue Arene
+	 * 
 	 * @param info information
 	 */
-	public void evenementArene(String info) {
-		((JeuClient)this.leJeu).envoi(TCHAT+STRINGSEPARE+info);
+	public void evenementArene(Object info) {
+		if (info instanceof String) {
+			((JeuClient) this.leJeu).envoi(TCHAT + STRINGSEPARE + info);
+		} else if (info instanceof Integer) {
+			((JeuClient)this.leJeu).envoi(ACTION + STRINGSEPARE + info);
+		}
 	}
 
 	@Override
@@ -165,6 +171,12 @@ public class Controle implements AsyncResponse, Global {
 		}
 	}
 
+	/**
+	 * Envoi d'informations vers l'ordinateur distant
+	 * 
+	 * @param connection objet de connexion pour l'envoi vers l'ordinateur distant
+	 * @param info       information à envoyer
+	 */
 	public void envoi(Connection connection, Object info) {
 		connection.envoi(info);
 	}

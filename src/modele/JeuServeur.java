@@ -15,6 +15,9 @@ import outils.connexion.Connection;
  */
 public class JeuServeur extends Jeu implements Global {
 
+	/**
+	 * permet de connatre les persos connectés
+	 */
 	private Connection connection;
 	/**
 	 * Collection de murs
@@ -27,11 +30,16 @@ public class JeuServeur extends Jeu implements Global {
 
 	/**
 	 * Constructeur
+	 * @param controle instance de la classe Controle du controleur
 	 */
 	public JeuServeur(Controle controle) {
 		super.controle = controle;
 	}
 
+	/**
+	 * ajoute un label dans le jeu
+	 * @param info JLabel a ajouter
+	 */
 	public void ajoutJLabelJeuArene(JLabel info) {
 		this.controle.evenementJeuServeur(AJOUTLABELJEU, info);
 	}
@@ -54,6 +62,9 @@ public class JeuServeur extends Jeu implements Global {
 			phrase = this.lesJoueurs.get(connection).getPseudo()+" > "+phrase;
 			this.controle.evenementJeuServeur(AJOUTPHRASE, phrase);
 			break;
+		case ACTION:
+			Integer action = Integer.parseInt(infos[1]);
+			this.lesJoueurs.get(connection).action(action, this.lesJoueurs.values(), this.lesMurs);
 		}
 	}
 
@@ -64,6 +75,7 @@ public class JeuServeur extends Jeu implements Global {
 	/**
 	 * Envoi d'une information vers tous les clients fais appel plusieurs fois à
 	 * l'envoi de la classe Jeu
+	 * @param info information a traité
 	 */
 	public void envoi(Object info) {
 		for(Connection connection : this.lesJoueurs.keySet()) {

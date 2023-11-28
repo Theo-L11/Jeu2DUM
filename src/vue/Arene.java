@@ -90,12 +90,22 @@ public class Arene extends JFrame implements Global {
 		this.jpnMurs.repaint();
 	}
 
+	/**
+	 * 
+	 * @param jpnJeu le jpnJeu a modifié
+	 */
 	public void setJpnJeu(JPanel jpnJeu) {
 		this.jpnJeu.removeAll();
 		this.jpnJeu.add(jpnJeu);
 		this.jpnJeu.repaint();
+		this.contentPane.requestFocus();
 	}
 
+	/**
+	 * ajoute une phrase dans la zone de tchat
+	 * 
+	 * @param phrase la phrase a ajouter
+	 */
 	public void ajoutTChat(String phrase) {
 		this.txtChat.setText(txtChat.getText() + phrase + "\r\n");
 		this.txtChat.setCaretPosition(this.txtChat.getDocument().getLength());
@@ -133,7 +143,28 @@ public class Arene extends JFrame implements Global {
 			if (!this.txtSaisie.getText().equals("")) {
 				this.controle.evenementArene(this.txtSaisie.getText());
 				this.txtSaisie.setText("");
+				this.contentPane.requestFocus();
 			}
+		}
+	}
+	/**
+	 * événement touche préssée dans le contentPane
+	 * @param e infos sur la touche
+	 */
+	public void contentPane_keyPressed(KeyEvent e) {
+		// initialisation de la variable de touche
+		int touche = -1;
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_UP:
+		case KeyEvent.VK_DOWN:
+			touche = e.getKeyCode();
+			break;
+		}
+		// si touche ne contient pas -1 alors on envoie l'info au controleur
+		if(touche != -1) {
+			this.controle.evenementArene(touche);
 		}
 	}
 
@@ -151,6 +182,14 @@ public class Arene extends JFrame implements Global {
 		setTitle("Arena");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
+		if (this.client) {
+			contentPane.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					contentPane_keyPressed(e);
+				}
+			});
+		}
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -185,6 +224,12 @@ public class Arene extends JFrame implements Global {
 		contentPane.add(jspChat);
 
 		txtChat = new JTextArea();
+		txtChat.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				contentPane_keyPressed(e);
+			}
+		});
 		jspChat.setViewportView(txtChat);
 		txtChat.setEditable(false);
 

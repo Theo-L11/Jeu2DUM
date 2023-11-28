@@ -40,6 +40,9 @@ public class ChoixJoueur extends JFrame implements Global {
 	 */
 	private JLabel lblPersonnage;
 
+	/**
+	 * fais le lien avec le controleur
+	 */
 	private Controle controle;
 
 	/**
@@ -86,10 +89,16 @@ public class ChoixJoueur extends JFrame implements Global {
 		this.lblPersonnage.setIcon(new ImageIcon(resource));
 	}
 
+	/**
+	 * change la souris en souris normale lorsqu'elle ne pointe aucune des "zones"
+	 */
 	private void sourisNormale() {
 		contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
+	/**
+	 * change la souris en doigt lorsqu'elle est pointé sur une fleche ou sur le bouton GO
+	 */
 	private void sourisDoigt() {
 		contentPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}

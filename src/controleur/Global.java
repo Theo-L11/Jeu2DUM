@@ -194,5 +194,17 @@ public interface Global {
 	 * premier message quand perso se connecte
 	 */
 	String VIENTDESECO = " vient de se connecter ";
+	/**
+	 * ordre action
+	 */
+	String ACTION = "action";
+	/**
+	 * nombre de pas pour un deplacement (en pixel)
+	 */
+	int NBPAS = 10;
+	/**
+	 * nombre d'étapes (d'images) pour donner l'impresson de marche
+	 */
+	int NBETAPESMARCHE = 4;
 
 }

@@ -16,7 +16,9 @@ public class JeuClient extends Jeu implements Global {
 	 * objet de connexion pour communiquer avec le serveur
 	 */
 	private Connection connection;
-	
+	/**
+	 * permet de verifier la presence ou non de mur
+	 */
 	private boolean mursOK = false;
 	/**
 	 * Controleur

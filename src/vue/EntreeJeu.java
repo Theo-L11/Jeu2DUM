@@ -20,8 +20,17 @@ import java.awt.event.ActionEvent;
 
 public class EntreeJeu extends JFrame implements Global {
 
+	/**
+	 * panel de demarrage de l'appli
+	 */
 	private JPanel frmUrbanMarginal;
+	/**
+	 * zone de saisie de l'IPServer
+	 */
 	private JTextField txtIPServer;
+	/**
+	 * Propriété qui fait le lien avec le controleur
+	 */
 	private Controle controle;
 
 	/**
