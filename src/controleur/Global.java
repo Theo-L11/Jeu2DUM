@@ -170,5 +170,29 @@ public interface Global {
 	 * ordre modif panel jeu
 	 */
 	String MODIFPANELJEU = "modif panel jeu";
+	/**
+	 * ordre tchat
+	 */
+	String TCHAT = "tchat";
+	/**
+	 * ordre d'ajouter une phrase
+	 */
+	String AJOUTPHRASE = "ajout phrase";
+	/**
+	 * ordre modif tchat
+	 */
+	String MODIFTCHAT = "modif tchat";
+	/**
+	 * s'agit d'un jeu client
+	 */
+	String CLIENT = "client";
+	/**
+	 * etoiles d'ouverture et fermeture de phrase
+	 */
+	String ETOILES = "***";
+	/**
+	 * premier message quand perso se connecte
+	 */
+	String VIENTDESECO = " vient de se connecter ";
 
 }
