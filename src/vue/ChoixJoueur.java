@@ -6,6 +6,7 @@ import java.net.URL;
 
 import controleur.Controle;
 import controleur.Global;
+import outils.son.Son;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -49,6 +50,23 @@ public class ChoixJoueur extends JFrame implements Global {
 	 * numero du personnage affiché
 	 */
 	private int numPerso;
+	
+	/**
+	 * son de bienvenue
+	 */
+	private Son sonBienvenue;
+	/**
+	 * son sur clic fleche gauche
+	 */
+	private Son sonFlecheGauche;
+	/**
+	 * son sur clic fleche droite
+	 */
+	private Son sonFlecheDroite;
+	/**
+	 * son sur clic go
+	 */
+	private Son sonGo;
 
 	/**
 	 * Clic sur la flèche "précédent" pour afficher le personnage précédent
@@ -57,6 +75,7 @@ public class ChoixJoueur extends JFrame implements Global {
 		// System.out.println("Clic sur precedent");
 		numPerso = ((numPerso + 1) % NBPERSOS) + 1;
 		affichePerso();
+		sonFlecheGauche.play();
 	}
 
 	/**
@@ -66,6 +85,7 @@ public class ChoixJoueur extends JFrame implements Global {
 		// System.out.println("Clic sur suivant");
 		numPerso = (numPerso % NBPERSOS) + 1;
 		affichePerso();
+		sonFlecheGauche.play();
 	}
 
 	/**
@@ -78,6 +98,7 @@ public class ChoixJoueur extends JFrame implements Global {
 		} else {
 			this.controle.evenementChoixJoueur(this.txtPseudo.getText(), this.numPerso);
 		}
+		sonGo.play();
 	}
 
 	/**
@@ -204,6 +225,12 @@ public class ChoixJoueur extends JFrame implements Global {
 
 		this.numPerso = 1;
 		this.affichePerso();
+		
+		sonBienvenue = new Son(getClass().getClassLoader().getResource(SONWELCOME));
+		sonFlecheGauche = new Son(getClass().getClassLoader().getResource(SONPRECEDENT));
+		sonFlecheDroite = new Son(getClass().getClassLoader().getResource(SONSUIVANT));
+		sonGo = new Son(getClass().getClassLoader().getResource(SONGO));
+		sonBienvenue.play();
 
 	}
 }

@@ -58,7 +58,9 @@ public class Boule extends Objet implements Global, Runnable {
 
 	@Override
 	public void run() {
-		// affichage de l'attaquant a la positio 1 de la marche
+		// envoi du son FIGHT
+		this.jeuServeur.envoi(FIGHT);
+		// afficher l'attaquant à l'étape repos de la marche
 		this.attaquant.affiche(MARCHE, 1);
 		// rendre boule visite
 		this.jLabel.setVisible(true);
@@ -85,6 +87,8 @@ public class Boule extends Objet implements Global, Runnable {
 		} while (posX >= 0 && posX <= LARGEURARENE && victime == null && this.toucheCollectionObjets(lesMurs) == null);
 		// test pour savoir si il y a victime touchée
 		if (victime != null && !victime.estMort()) {
+			// envoi du son HURT
+			this.jeuServeur.envoi(HURT);
 			victime.perteVie();
 			this.attaquant.gainVie();
 			// boucle pour l'affichage de lanimation du blessé
@@ -93,6 +97,8 @@ public class Boule extends Objet implements Global, Runnable {
 				pause(80, 0);
 			}
 			if (victime.estMort()) {
+				// envoi du son DEATH
+				this.jeuServeur.envoi(DEATH);
 				// boucle pour l'animation de la Mort
 				for (int k = 1; k <= NBETAPESMORT; k++) {
 					victime.affiche(MORT, k);
@@ -108,11 +114,12 @@ public class Boule extends Objet implements Global, Runnable {
 		// envoi a tous
 		this.jeuServeur.envoiJeuATous();
 	}
-	
+
 	/**
 	 * fais une pause (bloque le processus) d'une durée précise
+	 * 
 	 * @param millis millisecondes
-	 * @param nanos nanosecondes
+	 * @param nanos  nanosecondes
 	 */
 	private void pause(long millis, int nanos) {
 		try {
