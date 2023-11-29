@@ -206,5 +206,20 @@ public interface Global {
 	 * nombre d'étapes (d'images) pour donner l'impresson de marche
 	 */
 	int NBETAPESMARCHE = 4;
-
+	/**
+	 * nombres d'etapes (d'images) pour donner l'impression qu'un personnage est touché
+	 */
+	int NBETAPESTOUCHE = 2;
+	/**
+	 * nombres d'étapes (d'image) pour donner l'impression que le personnage meurt
+	 */
+	int NBETAPESMORT = 2;
+	/**
+	 * largeur d'une boule
+	 */
+	int LARGEURBOULE = 17;
+	/**
+	 * hauteur d'une boule
+	 */
+	int HAUTEURBOULE = 17;
 }
